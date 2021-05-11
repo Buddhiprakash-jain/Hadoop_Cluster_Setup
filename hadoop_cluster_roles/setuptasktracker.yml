@@ -1,0 +1,6 @@
+- name: "Configuring Hadoop Tasktracker"
+  hosts: tag_Name_hadooptasktracker1
+  roles:
+   - tasktracker
+
+

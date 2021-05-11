@@ -1,0 +1,8 @@
+- hosts: localhost
+  tasks:
+  - name: "edit var file"
+    replace:
+            path: "./client/vars/main.yml"
+            regexp: "# BEGIN ANSIBLE MANAGED BLOCK"
+            replace: ""
+

@@ -1,0 +1,12 @@
+port_namenode: 9001
+port_mapred: 9002
+dir_namenode: /nn
+dir_datanode: /dn
+access_key: '***AY5CG2ZPYXASY***'
+secret_key: '***EHFd4MYrJHwwmvPApxRwLnAgzP9+GO+27C***'
+key_name: ***keyname***
+instance_type: ***instancetypename***
+subnet_id: ***subnetid***
+image_id: ***imageid***
+security_group: ***securitygroup***
+region_name: ***regionname***

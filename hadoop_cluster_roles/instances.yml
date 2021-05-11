@@ -1,0 +1,94 @@
+- hosts: localhost
+  vars_files:
+  - var.txt
+  tasks:
+  - name: "launching ec2 instance for hadoop namenode"
+    ec2:
+     key_name: "{{ key_name }}"
+     instance_type: "{{ instance_type }}"
+     image: "{{ image_id }}"
+     count: 1
+     vpc_subnet_id: "{{ subnet_id }}"
+     group_id: "{{ security_group }}"
+     assign_public_ip: yes
+     wait: yes
+     instance_tags:
+      Name: hadoopnamenode1
+     region: "{{ region_name }}"
+     state: present
+     aws_access_key: "{{ access_key }}"
+     aws_secret_key: "{{ secret_key }}"
+    register: ec2
+
+  - name: "launching ec2 instance for hadoop datanode"
+    ec2:
+     key_name: "{{ key_name }}"
+     instance_type: "{{ instance_type }}"
+     image: "{{ image_id }}"
+     count: 3
+     vpc_subnet_id: "{{ subnet_id }}"
+     group_id: "{{ security_group }}"
+     assign_public_ip: yes
+     wait: yes
+     instance_tags:
+      Name: hadoopdatanode1
+     region: "{{ region_name }}"
+     state: present
+     aws_access_key: "{{ access_key }}"
+     aws_secret_key: "{{ secret_key }}"
+    register: ec2
+    
+  - name: "launching ec2 instance for hadoop jobtracker"
+    ec2:
+     key_name: "{{ key_name }}"
+     instance_type: "{{ instance_type }}"
+     image: "{{ image_id }}"
+     count: 1
+     vpc_subnet_id: "{{ subnet_id }}"
+     group_id: "{{ security_group }}"
+     assign_public_ip: yes
+     wait: yes
+     instance_tags:
+      Name: hadoopjobtracker1
+     region: "{{ region_name }}"
+     state: present
+     aws_access_key: "{{ access_key }}"
+     aws_secret_key: "{{ secret_key }}"
+    register: ec2
+
+  
+  - name: "launching ec2 instance for hadoop tasktracker"
+    ec2:
+     key_name: "{{ key_name }}"
+     instance_type: "{{ instance_type }}"
+     image: "{{ image_id }}"
+     count: 3
+     vpc_subnet_id: "{{ subnet_id }}"
+     group_id: "{{ security_group }}"
+     assign_public_ip: yes
+     wait: yes
+     instance_tags:
+      Name: hadoopjobtracker1
+     region: "{{ region_name }}"
+     state: present
+     aws_access_key: "{{ access_key }}"
+     aws_secret_key: "{{ secret_key }}"
+    register: ec2
+    
+  - name: "launching ec2 instance for hadoop client"
+    ec2:
+     key_name: "{{ key_name }}"
+     instance_type: "{{ instance_type }}"
+     image: "{{ image_id }}"
+     count: 1
+     vpc_subnet_id: "{{ subnet_id }}"
+     group_id: "{{ security_group }}"
+     assign_public_ip: yes
+     wait: yes
+     instance_tags:
+      Name: hadoopclient1
+     region: "{{ region_name }}"
+     state: present
+     aws_access_key: "{{ access_key }}"
+     aws_secret_key: "{{ secret_key }}"
+    register: ec2

@@ -1,0 +1,6 @@
+dir_datanode: /dn
+port_mapred: 9002
+port_namenode: 9001
+namenodeip: 172.31.43.196
+jobtrackerip: 172.31.34.70
+# END ANSIBLE MANAGED BLOCK

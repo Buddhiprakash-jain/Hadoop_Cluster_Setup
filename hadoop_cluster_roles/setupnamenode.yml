@@ -1,0 +1,5 @@
+- name: "Configuring Hadoop Namenode"
+  hosts: tag_Name_hadoopnamenode1
+  roles:
+   - namenode
+

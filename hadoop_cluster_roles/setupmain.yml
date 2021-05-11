@@ -1,0 +1,64 @@
+- hosts: localhost
+  tasks:
+  - debug: 
+          msg: "Please wait.. required softwares are downloading"
+
+  - name: "Required Softwares are downloading"
+    shell: "ansible-playbook ./download_software.yml"
+    register: software
+
+  - debug:
+          var: software.stdout_lines
+
+  - debug:
+          msg: "Please wait.. Configuring Hadoop Namenode takes some time"
+
+  - name: "Configuring Hadoop Namenode"
+    shell: "ansible-playbook ./setupnamenode.yml"
+    register: namenode
+
+  - debug:
+          var: namenode.stdout_lines
+
+  - debug:
+          msg: "Please wait.. Configuring Hadoop Datanode takes some time"
+
+  - name: "Configuring Hadoop Datanode"
+    shell: "ansible-playbook ./setupdatanode.yml"
+    register: datanode
+
+  - debug:
+          var: datanode.stdout_lines
+
+  - debug:
+          msg: "Please wait.. Configuring Hadoop Jobtracker takes some time"
+
+  - name: "Configuring Hadoop Jobtracker"
+    shell: "ansible-playbook ./setupjobtracker.yml"
+    register: jobtracker
+
+  - debug:
+          var: jobtracker.stdout_lines
+
+  - debug:
+          msg: "Please wait.. Configuring Hadoop Tasktracker takes some time"
+
+  - name: "Configuring Hadoop Tasktracker"
+    shell: "ansible-playbook ./setuptasktracker.yml"
+    register: tasktracker
+
+  - debug:
+          var: tasktracker.stdout_lines
+
+  - name: "editing client role variable file"
+    shell: "ansible-playbook ./edit_client_vars.yml"
+
+  - debug:
+          msg: "Please wait.. Configuring Hadoop Client takes some time"
+
+  - name: "Configuring Hadoop Client"
+    shell: "ansible-playbook ./setupclient.yml"
+    register: client
+
+  - debug:
+          var: client.stdout_lines

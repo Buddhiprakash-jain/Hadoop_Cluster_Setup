@@ -1,0 +1,5 @@
+dir_datanode: /dn
+port_namenode: 9001
+namenodeip: 172.31.40.1
+
+172.31.40.1

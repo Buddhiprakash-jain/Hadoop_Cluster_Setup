@@ -1,0 +1,38 @@
+- hosts: localhost
+  tasks:
+  - name: "Creating software folder"
+    file:
+            name: "./software"
+            state: directory
+
+  - name: "Creating hivesoftware folder"
+    file:
+            name: "./hivesoftware"
+            state: directory
+
+  - name: "Installing python3 software"
+    package:
+          name: "python3"
+          state: present
+   
+  - name: "Installing gdown command"
+    shell: "pip3 install gdown"
+
+  - name: "Installing hadoop software"
+    shell: "gdown --id 1laMgpHPMH1urWYb9iXO4xLUVhpI0TfNG"
+
+  - name: "Installing jdk software"
+    shell: "gdown --id 1KV7l0ApxLEWR7vu_P3ovFJdCS1XExq5q"
+
+  - name: "Installing hive software"
+    shell: "gdown --id 1gnu8xzK0AFUwJLE5BePHaR-2_P55zAdu"  
+
+  - name: "Move hadoop software to the folder"
+    shell: "mv hadoop-1.2.1-1.x86_64.rpm ./software" 
+
+  - name: "Move jdk software to the folder"
+    shell: "mv jdk-8u171-linux-x64.rpm ./software"
+ 
+  - name: "Move hive software to the folder"
+    shell: "mv apache-hive-0.13.1-bin.tar.gz ./hivesoftware"
+

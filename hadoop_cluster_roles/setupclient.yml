@@ -1,0 +1,5 @@
+- name: "Configuring Hadoop Cluster Client"
+  hosts: tag_Name_hadoopclient1
+  roles:
+   - client
+

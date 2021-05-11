@@ -1,0 +1,5 @@
+- name: "Configuring Hadoop Datanode"
+  hosts: tag_Name_hadoopdatanode1
+  roles:
+   - datanode
+

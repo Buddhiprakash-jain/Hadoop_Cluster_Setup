@@ -1,0 +1,63 @@
+  - name: "coping software"
+    copy:
+       src: "./software"
+       dest: "/"
+   
+  - name: "install hadoop software"
+    shell: "rpm -ivh /software/hadoop-1.2.1-1.x86_64.rpm --force"
+
+  - name: "install jdk software"
+    shell: "rpm -i /software/jdk-8u171-linux-x64.rpm"
+    ignore_errors: yes
+
+  - name: "configure mapreduce file"
+    template:
+       src: "jobtracker_mapred"
+       dest: "/etc/hadoop/mapred-site.xml"
+
+  - name: "configure core file"
+    template:
+       src: "datanode_core.xml"
+       dest: "/etc/hadoop/core-site.xml"
+
+  - name: "start hadoop jobtracker  service"
+    command: "hadoop-daemon.sh start jobtracker"
+    ignore_errors: yes
+
+  - name: "enabling jobtracker service permanently"
+    blockinfile:
+            path: "/etc/rc.d/rc.local"
+            block: |
+                    hadoop-daemon.sh start jobtracker
+
+  - name: "making file executable"
+    shell: "chmod +x /etc/rc.d/rc.local"
+
+  - name: "sending variable file  to jobtracker"
+    template:
+            src: "varsfile_client.txt"
+            dest: "/varsfile_client.txt"
+
+
+  - name: "Writing block of ip in variable file"
+    blockinfile:
+            path: "/varsfile_client.txt"
+            block: |
+                    jobtrackerip: {{ ansible_facts['eth0']['ipv4']['address'] }}
+
+  - name: "Reading variable file"
+    shell: "cat /varsfile_client.txt"
+    register: y
+
+  - name: "sending variable file to tasktracker role"
+    local_action:
+            copy
+                content="{{ y.stdout }}"
+                dest="./tasktracker/vars/main.yml"
+
+  - name: "sending client variable file in client role"
+    local_action:
+            copy
+                   content="{{ y.stdout }}"
+                   dest="./client/vars/main.yml"
+   

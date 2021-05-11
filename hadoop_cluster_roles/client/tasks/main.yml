@@ -1,0 +1,40 @@
+  - name: "coping software"
+    copy:
+       src: "./software"
+       dest: "/"
+
+  - name: "coping hive software"
+    copy:
+       src: "./hivesoftware"
+       dest: "/"
+
+  - name: "install hadoop software"
+    shell: "rpm -i /software/hadoop-1.2.1-1.x86_64.rpm --force"
+
+  - name: "install jdk software"
+    shell: "rpm -i /software/jdk-8u171-linux-x64.rpm"
+    ignore_errors: yes
+    
+  - name: "configure datanode file"
+    template:
+       src: "datanode_core.xml"
+       dest: "/etc/hadoop/core-site.xml"
+
+  - name: "configure mapred file"
+    template:
+       src: "tasktracker_mapred"
+       dest: "/etc/hadoop/mapred-site.xml"
+
+  - name: "Untar hive software in /opt folder"
+    shell: "tar -xvzf /hivesoftware/apache-hive-0.13.1-bin.tar.gz -C /opt/"
+
+  - name: "Rename hive software"
+    shell: "mv /opt/apache-hive-0.13.1-bin/ /opt/apache-hive"
+
+  - name: "Set hive home directory and path permanently"
+    blockinfile:
+            path: "/root/.bashrc"
+            block: |
+                    export HIVE_HOME=/opt/apache-hive/
+                    export PATH=/opt/apache-hive/bin/:$PATH
+

@@ -1,0 +1,5 @@
+- name: "Configuring Hadoop Jobtracker"
+  hosts: tag_Name_hadoopjobtracker1
+  roles:
+   - jobtracker
+

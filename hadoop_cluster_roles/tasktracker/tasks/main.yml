@@ -1,0 +1,30 @@
+  - name: "coping software"
+    copy:
+       src: "./software"
+       dest: "/"
+
+  - name: "install hadoop software"
+    shell: "rpm -i /software/hadoop-1.2.1-1.x86_64.rpm --force"
+
+  - name: "install jdk software"
+    shell: "rpm -i /software/jdk-8u171-linux-x64.rpm"
+    ignore_errors: yes
+
+  - name: "configure mapred file"
+    template:
+       src: "tasktracker_mapred"
+       dest: "/etc/hadoop/mapred-site.xml"
+
+  - name: "start hadoop tasktracker service"
+    command: "hadoop-daemon.sh start tasktracker"
+    ignore_errors: yes
+
+  - name: "enabling tasktracker service permanently"
+    blockinfile:
+            path: "/etc/rc.d/rc.local"
+            block: |
+                    sudo hadoop-daemon.sh start tasktracker
+
+  - name: "making file executable"
+    shell: "chmod +x /etc/rc.d/rc.local"
+

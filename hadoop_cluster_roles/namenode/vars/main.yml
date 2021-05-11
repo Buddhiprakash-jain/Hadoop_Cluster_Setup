@@ -1,0 +1,4 @@
+---
+# vars file for namenode
+dir_namenode: /nn
+port_namenode: 9001
