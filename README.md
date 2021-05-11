@@ -1,4 +1,4 @@
-# Hadoop_Cluster_Setup_with_Hive_by_Ansible
+# Setup_Hadoop_HDFS-Cluster_MAPREDUCE-Cluster_with_Client_by_Ansible
 
 ##WHAT TO DO FOR RUNNING THE SCRIPT->
 ## For Launching Amazon_instances for namenode,datanode,jobtracker,tasktracker,client you can use instances.yml file and do changes according to your requirements in file var.txt.
