@@ -15,3 +15,6 @@
  - export AWS_REGION='region name'
 7. 💥💥VERY IMPORTANT POINT FOR SETUP THE CLUSTER
 8. ## After reading above instructions for deploying the Hadoop_Cluster_with_Hive setup use "ansible-playbook setupmain.yml" command. 
+
+##For More Detail go Through Blog:-
+❗Blog URL:- https://buddhijainmadhorajpura72.medium.com/setup-hadoop-hdfs-cluster-mapreduce-cluster-and-client-with-hive-by-ansible-974eadfebb45
